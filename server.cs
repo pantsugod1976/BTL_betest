@@ -24,8 +24,8 @@ namespace BTL_update
             if (res == DialogResult.OK)
             {
                 Connection connect = new Connection();
-                connect.Server = tbServer.Text.Trim();
-                connect.Database = tbDatabase.Text.Trim();
+                connect.default_server = tbServer.Text.Trim();
+                connect.default_database = tbDatabase.Text.Trim();
             }
             else
             {
@@ -36,6 +36,10 @@ namespace BTL_update
 
         private void server_Load(object sender, EventArgs e)
         {
+            Connection connection = new Connection();
+            connection.connectSQL();
+            tbServer.Text = connection.default_server;
+            tbDatabase.Text = connection.default_database;
             prev_database = tbDatabase.Text.Trim();
             prev_server = tbServer.Text.Trim();
         }

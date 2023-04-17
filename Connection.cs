@@ -9,16 +9,15 @@ namespace BTL_update
 {
     internal class Connection
     {
+        public string default_server = "localhost\\SQLEXPRESS";
+        public string default_database = "test";
         private string servername;
         private string database;
-        public string Server { get; set; }
-        public string Database { get; set; }
         public Connection()
         {
-            servername = "localhost\\SQLEXPRESS";
-            database = "test";
+            servername = default_server;
+            database = default_database;
         }
-
         public SqlConnection connectSQL()
         {
             string connect = string.Format("Data Source = {0};Initial Catalog = {1};integrated security = true", servername, database);
