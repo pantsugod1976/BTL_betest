@@ -68,6 +68,8 @@ namespace BTL_update
             dataGridView1.Columns.Add(col);
             CB_subject();
             CB_Type();
+            dataGridView1.CurrentCell = null;
+
         }
 
         private void btAdd_Click(object sender, EventArgs e)
@@ -78,8 +80,7 @@ namespace BTL_update
 
         private void QuestionManage_EnabledChanged(object sender, EventArgs e)
         {
-            Generate_TB();
-            dataGridView1.Refresh();
+            
         }
         public void RefreshData()
         {
@@ -102,11 +103,6 @@ namespace BTL_update
             }
         }
 
-        private void QuestionManage_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btSearch_Click(object sender, EventArgs e)
         {
             string description = tbDescription.Text.Trim();
@@ -125,6 +121,80 @@ namespace BTL_update
                 }
             }
             dataGridView1.Refresh();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.btAdd_Click(sender, e);
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Refresh();
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewCellEventArgs ex = new DataGridViewCellEventArgs(dataGridView1.SelectedColumns[0].Index, dataGridView1.SelectedRows[0].Index);
+            this.dataGridView1_CellContentClick(sender, ex);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Bạn có muốn xóa câu hỏi?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (res == DialogResult.OK)
+            {
+                int cell_index = dataGridView1.SelectedCells[0].RowIndex;
+                string id = dataGridView1.Rows[cell_index].Cells[dataGridView1.Columns["ID"].Index].Value.ToString();
+                int ID = int.Parse(id);
+                int prev_ID = ID - 1;
+                string query = string.Format("begin transaction;\ndelete from question where ID = {0}\nDBCC CHECKIDENT(question, reseed, {1})\ncommit;", ID, prev_ID.ToString());
+                using (SqlConnection conn = connect.connectSQL())
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Xóa thành công");
+                this.Close();
+                Application.OpenForms["HomePage"].Enabled = true;
+            }
+        }
+
+        private void dataGridView1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                DataGridView.HitTestInfo hit = dataGridView1.HitTest(e.X, e.Y);
+                if (hit.Type == DataGridViewHitTestType.None)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.CurrentCell = null;
+                    toolStripMenuItem1.Visible = true;
+                    refreshToolStripMenuItem.Visible = true;
+                    thoátToolStripMenuItem.Visible = true;
+                    editToolStripMenuItem.Visible = false;
+                    deleteToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    if(dataGridView1.SelectedCells.Count > 0)
+                    {
+                        toolStripMenuItem1.Visible = false;
+                        refreshToolStripMenuItem.Visible = false;
+                        thoátToolStripMenuItem.Visible = false;
+                        editToolStripMenuItem.Visible = true;
+                        deleteToolStripMenuItem.Visible = true;
+                    }
+                }
+            }
         }
     }
 }
