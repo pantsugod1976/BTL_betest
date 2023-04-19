@@ -62,6 +62,7 @@ namespace BTL_update
             {
                 try
                 {
+                    MessageBox.Show(connect.server + " " + connect.database);
                     conn.Open();
                 }
                 catch(Exception ex) 

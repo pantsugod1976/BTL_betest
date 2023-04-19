@@ -11,15 +11,17 @@ namespace BTL_update
     internal class Connection
     {
         private string servername;
-        private string database;
+        private string databasename;
+        public string server{get; set;}
+        public string database { get; set;}
         public Connection()
         {
             servername = ConfigurationManager.AppSettings["ServerName"];
-            database = ConfigurationManager.AppSettings["DatabaseName"];
+            databasename = ConfigurationManager.AppSettings["DatabaseName"];
         }
         public SqlConnection connectSQL()
         {
-            string connect = string.Format("Data Source = {0};Initial Catalog = {1};integrated security = true", servername, database);
+            string connect = string.Format("Data Source = {0};Initial Catalog = {1};integrated security = true", servername, databasename);
             return new SqlConnection(connect);
         }
     }
