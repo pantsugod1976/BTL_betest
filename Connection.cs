@@ -4,19 +4,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace BTL_update
 {
     internal class Connection
     {
-        public string default_server = "localhost\\SQLEXPRESS";
-        public string default_database = "test";
         private string servername;
         private string database;
         public Connection()
         {
-            servername = default_server;
-            database = default_database;
+            servername = ConfigurationManager.AppSettings["ServerName"];
+            database = ConfigurationManager.AppSettings["DatabaseName"];
         }
         public SqlConnection connectSQL()
         {

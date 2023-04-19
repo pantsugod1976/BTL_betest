@@ -52,12 +52,24 @@ namespace BTL_update
             {
                 using (SqlDataAdapter adt = new SqlDataAdapter(query, conn))
                 {
-                    adt.Fill(dt);
+                        adt.Fill(dt);
                 }
             }
         }
         private void QuestionManage_Load(object sender, EventArgs e)
         {
+            using(SqlConnection conn = connect.connectSQL())
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch(Exception ex) 
+                {
+                    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK);
+                    return;
+                }
+            }
             Generate_TB();
             dataGridView1.DataSource = dt;
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();

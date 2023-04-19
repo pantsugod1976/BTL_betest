@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BTL_update
 {
@@ -18,14 +20,21 @@ namespace BTL_update
         }
         private string prev_server;
         private string prev_database;
+        private static void SetSetting(string key, string value)
+        {
+            Configuration configuration =
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.Save(ConfigurationSaveMode.Full, true);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
         private void btChange_Click(object sender, EventArgs e)
         {
             DialogResult res = MessageBox.Show("Bạn có muốn thay đổi kết nối server?", "Server connect", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (res == DialogResult.OK)
             {
-                Connection connect = new Connection();
-                connect.default_server = tbServer.Text.Trim();
-                connect.default_database = tbDatabase.Text.Trim();
+                SetSetting("ServerName", tbServer.Text);
+                SetSetting("DatabaseName", tbDatabase.Text);
             }
             else
             {
@@ -36,10 +45,8 @@ namespace BTL_update
 
         private void server_Load(object sender, EventArgs e)
         {
-            Connection connection = new Connection();
-            connection.connectSQL();
-            tbServer.Text = connection.default_server;
-            tbDatabase.Text = connection.default_database;
+            tbServer.Text = ConfigurationManager.AppSettings["ServerName"];
+            tbDatabase.Text = ConfigurationManager.AppSettings["DatabaseName"];
             prev_database = tbDatabase.Text.Trim();
             prev_server = tbServer.Text.Trim();
         }
