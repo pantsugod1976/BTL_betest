@@ -35,11 +35,24 @@ namespace BTL_update
             {
                 SetSetting("ServerName", tbServer.Text);
                 SetSetting("DatabaseName", tbDatabase.Text);
-            }
-            else
-            {
-                tbServer.Text = prev_server; 
-                tbDatabase.Text = prev_database;
+                using (SqlConnection conn = new Connection().connectSQL())
+                {
+                    try
+                    {
+                        conn.Open();
+                    }
+                    catch(SqlException ex)
+                    {
+                        res = MessageBox.Show(ex.Message, "", MessageBoxButtons.OK);
+                        if (res == DialogResult.OK)
+                        {
+                            SetSetting("ServerName", prev_server);
+                            SetSetting("DatabaseName", prev_database);
+                            tbServer.Text = prev_server;
+                            tbDatabase.Text = prev_database;
+                        }
+                    }
+                }
             }
         }
 
