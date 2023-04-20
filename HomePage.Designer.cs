@@ -115,7 +115,6 @@
             this.Name = "HomePage";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.HomePage_Load);
-            this.EnabledChanged += new System.EventHandler(this.HomePage_EnabledChanged);
             this.tbPanelButton.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);

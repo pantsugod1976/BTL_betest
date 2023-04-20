@@ -206,7 +206,6 @@
             this.gbChoice.Size = new System.Drawing.Size(586, 131);
             this.gbChoice.TabIndex = 10;
             this.gbChoice.TabStop = false;
-            this.gbChoice.Text = "gbChoice";
             // 
             // rbA
             // 

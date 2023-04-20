@@ -52,10 +52,5 @@ namespace BTL_update
         {
             open_ChildForm(new Setting());
         }
-
-        private void HomePage_EnabledChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

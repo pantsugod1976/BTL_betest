@@ -21,10 +21,47 @@ namespace BTL_update
         private DataTable dt = new DataTable();
         Connection sql = new Connection();
         List<string> list = new List<string>();
-
+        private void GetCBtype()
+        {
+            string query = "select distinct Kieu_cau_hoi from question";
+            using (SqlConnection conn = sql.connectSQL())
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            cbType.Items.Add(r.GetString(0));
+                        }
+                    }
+                }
+            }
+        }
+        private void GetSubject()
+        {
+            string query = "select distinct Hoc_phan from question";
+            using (SqlConnection conn = sql.connectSQL())
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            cbSubject.Items.Add(r.GetString(0));
+                        }
+                    }
+                }
+            }
+        }
         private void TestGenerate_Load(object sender, EventArgs e)
         {
-
+            GetCBtype();
+            GetSubject();
+            dgvList.AllowUserToAddRows = false;
         }
         private void GetQuestion()
         {

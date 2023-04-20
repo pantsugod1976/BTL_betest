@@ -37,7 +37,7 @@ namespace WindowsFormsApp2
         private void getDetail()
         {
             string query;
-            if (tbType.Text == "Trắc nghiệm")
+            if (tbType.Text.Equals("trắc nghiệm", StringComparison.OrdinalIgnoreCase))
             {
                 query = "SELECT question.Noi_dung, question.Hoc_phan, question.Kieu_cau_hoi, " +
                     "trac_nghiem.A, trac_nghiem.B, trac_nghiem.C, trac_nghiem.D, trac_nghiem.Lua_chon, trac_nghiem.Diem " +
@@ -199,6 +199,7 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Xóa thành công");
                 this.Close();
                 Application.OpenForms["HomePage"].Enabled = true;
+                form.RefreshData();
             }
         }
     }

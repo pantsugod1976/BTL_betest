@@ -47,6 +47,7 @@ namespace BTL_update
         }
         private void Generate_TB()
         {
+            dt.Clear();
             string query = "select ID, Noi_dung as 'Nội dung', Hoc_phan as 'Học phần', Kieu_cau_hoi as 'Kiểu câu hỏi' from question";
             using (SqlConnection conn = connect.connectSQL())
             {
@@ -98,6 +99,7 @@ namespace BTL_update
         }
         public void RefreshData()
         {
+            Generate_TB();
             dataGridView1.Refresh();
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -151,7 +153,7 @@ namespace BTL_update
 
         private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.OpenForms["HomePage"].Close();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -179,7 +181,6 @@ namespace BTL_update
                     }
                 }
                 MessageBox.Show("Xóa thành công");
-                this.Close();
                 Application.OpenForms["HomePage"].Enabled = true;
             }
         }
