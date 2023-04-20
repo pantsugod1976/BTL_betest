@@ -89,7 +89,8 @@ namespace BTL_update
         {
             Form frm = new AddQuestion(this);
             frm.Show();
-            Application.OpenForms["HomePage"].Enabled = false;        }
+            Application.OpenForms["HomePage"].Enabled = false;
+        }
 
         private void QuestionManage_EnabledChanged(object sender, EventArgs e)
         {
@@ -138,7 +139,9 @@ namespace BTL_update
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.btAdd_Click(sender, e);
+            Form frm = new AddQuestion(this);
+            frm.Show();
+            Application.OpenForms["HomePage"].Enabled = false;
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)

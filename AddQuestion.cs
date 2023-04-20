@@ -42,7 +42,7 @@ namespace BTL_update
                 string B = tbB.Text;
                 string C = tbC.Text;
                 string D = tbD.Text;
-                query += string.Format("INSERT INTO trac_nghiemm(ID_question, A, B, C, D, Lua_chon, Diem) VALUES (@Question_ID, N\'{0}\', N\'{1}\', N\'{2}\', N\'{3}\', N\'{4}\', {5})\n COMMIT;", A, B, C, D, choice, point);
+                query += string.Format("INSERT INTO trac_nghiem(ID_question, A, B, C, D, Lua_chon, Diem) VALUES (@Question_ID, N\'{0}\', N\'{1}\', N\'{2}\', N\'{3}\', N\'{4}\', {5})\n COMMIT;", A, B, C, D, choice, point);
             }
             using (SqlConnection conn = connect.connectSQL())
             {
@@ -129,6 +129,7 @@ namespace BTL_update
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+            form.RefreshData();
             Application.OpenForms["HomePage"].Enabled = true;
             Application.OpenForms["HomePage"].Show();
         }
