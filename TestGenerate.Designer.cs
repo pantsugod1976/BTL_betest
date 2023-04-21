@@ -79,6 +79,7 @@
             this.cbSubject.Name = "cbSubject";
             this.cbSubject.Size = new System.Drawing.Size(121, 21);
             this.cbSubject.TabIndex = 20;
+            this.cbSubject.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbSubject_KeyDown);
             // 
             // cbType
             // 
@@ -87,6 +88,7 @@
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(121, 21);
             this.cbType.TabIndex = 19;
+            this.cbType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbType_KeyDown);
             // 
             // lbType
             // 

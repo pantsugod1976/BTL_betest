@@ -63,5 +63,21 @@ namespace BTL_update
             prev_database = tbDatabase.Text.Trim();
             prev_server = tbServer.Text.Trim();
         }
+
+        private void tbServer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                tbDatabase.Focus();
+            }
+        }
+
+        private void tbDatabase_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btChange.PerformClick();
+            }
+        }
     }
 }

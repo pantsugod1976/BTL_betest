@@ -92,11 +92,6 @@ namespace BTL_update
             frm.Show();
             Application.OpenForms["HomePage"].Enabled = false;
         }
-
-        private void QuestionManage_EnabledChanged(object sender, EventArgs e)
-        {
-            
-        }
         public void RefreshData()
         {
             Generate_TB();
@@ -118,8 +113,7 @@ namespace BTL_update
                 Application.OpenForms["HomePage"].Enabled = false;
             }
         }
-
-        private void btSearch_Click(object sender, EventArgs e)
+        private void Search() 
         {
             string description = tbDescription.Text.Trim();
             string subject = cbSubject.Text.ToUpper();
@@ -137,6 +131,10 @@ namespace BTL_update
                 }
             }
             dataGridView1.Refresh();
+        }
+        private void btSearch_Click(object sender, EventArgs e)
+        {
+            Search();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -212,6 +210,54 @@ namespace BTL_update
                     }
                 }
             }
+        }
+
+        private void tbDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter){
+                cbSubject.Focus();
+                cbSubject.DroppedDown = true;
+            }
+        }
+
+        private void cbSubject_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter){
+                cbType.Focus();
+                cbType.DroppedDown = true;
+            }
+        }
+
+        private void cbType_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btSearch.PerformClick();
+            }
+        }
+
+        private void cbSubject_TextChanged(object sender, EventArgs e)
+        {
+            if(cbSubject.Text.Length == 0)
+            {
+                Search();
+            }
+        }
+
+        private void cbType_TextChanged(object sender, EventArgs e)
+        {
+            if (cbType.Text.Length == 0)
+            {
+                Search();
+            }
+        }
+
+        private void btReset_Click(object sender, EventArgs e)
+        {
+            tbDescription.Clear();
+            cbSubject.SelectedItem = null;
+            cbType.SelectedItem = null;
+            Search();
         }
     }
 }

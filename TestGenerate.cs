@@ -61,11 +61,14 @@ namespace BTL_update
         {
             GetCBtype();
             GetSubject();
+            cbType.Focus();
+            cbType.DroppedDown = true;
             dgvList.AllowUserToAddRows = false;
+            btPreview.Enabled = false;
         }
         private void GetQuestion()
         {
-            string query = "SELECT * FROM question WHERE Hoc_phan = N\'" + cbSubject.Text + "\' AND Kieu_cau_hoi = N\'" + cbType.Text + "\'";
+            string query = "SELECT ID, Noi_dung as 'Nội dung', Hoc_phan as 'Học phần', Kieu_cau_hoi as 'Kiểu câu hỏi' FROM question WHERE Hoc_phan = N\'" + cbSubject.Text + "\' AND Kieu_cau_hoi = N\'" + cbType.Text + "\'";
             using (SqlConnection conn = sql.connectSQL())
             {
                 conn.Open();
@@ -81,7 +84,7 @@ namespace BTL_update
         {
             if (cbSubject.SelectedItem == null || cbType.SelectedItem == null)
             {
-                MessageBox.Show("Null value", "", MessageBoxButtons.OK);
+                MessageBox.Show("Chưa chọn học phần hay kiểu câu hỏi", "", MessageBoxButtons.OK);
                 return;
             }
             GetQuestion();
@@ -93,6 +96,7 @@ namespace BTL_update
                 dataGridViewCheckBoxColumn.HeaderText = "Add";
                 dgvList.Columns.Add(dataGridViewCheckBoxColumn);
             }
+            btPreview.Enabled = true;
         }
         private void WriteTxt(DataTable dt, string FolderPath, string FolderName)
         {
@@ -123,6 +127,12 @@ namespace BTL_update
         }
         private void btPreview_Click(object sender, EventArgs e)
         {
+            if(list.Count == 0)
+            {
+                MessageBox.Show("Chưa lựa chọn câu hỏi", "", MessageBoxButtons.OK);
+                dgvList.CurrentCell = dgvList.Rows[0].Cells[dgvList.ColumnCount-1];
+                return;
+            }
             FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
             folderBrowser.ShowDialog();
             string FolderPath = folderBrowser.SelectedPath;
@@ -176,31 +186,43 @@ namespace BTL_update
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                if (tbSearch.Text == null || tbSearch.Text == "")
+                string query = "SELECT ID, Noi_dung, Hoc_phan, Kieu_cau_hoi FROM question WHERE Hoc_phan = N\'" + cbSubject.Text + "\' AND Kieu_cau_hoi = N\'" + cbType.Text + "\'";
+                string querySearch = string.Format("select a.ID, a.Noi_dung as 'Nội dung', a.Hoc_phan as 'Học phần', a.Kieu_cau_hoi as 'Kiểu câu hỏi' from ({0})a where a.Noi_dung like \'%{1}%\'", query, tbSearch.Text);
+                using (SqlConnection conn = sql.connectSQL())
                 {
-                    return;
+                    conn.Open();
+                    using (SqlDataAdapter adt = new SqlDataAdapter(querySearch, conn))
+                    {
+                        dt.Clear();
+                        adt.Fill(dt);
+                    }
                 }
-                int Row_Search = -1;
-                DataGridViewRow row = dgvList.Rows.Cast<DataGridViewRow>().Where(r => r.Cells["Noi_dung"].Value.ToString().Equals(tbSearch.Text)).First();
-                Row_Search = row.Index;
-                if (Row_Search == -1)
-                {
-                    MessageBox.Show("Không có kết quả phù hợp", "", MessageBoxButtons.OK);
-                    tbSearch.Focus();
-                }
-                else
-                {
-                    dgvList.ClearSelection();
-                    dgvList.Rows[Row_Search].Selected = true;
-                }
+                dgvList.Refresh();
             }
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbSearch.Text))
+            if (tbSearch.Text == "" || tbSearch.Text == null)
             {
-                dgvList.ClearSelection();
+                GetQuestion();
+            }
+        }
+
+        private void cbType_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                cbSubject.Focus();
+                cbSubject.DroppedDown = true;
+            }
+        }
+
+        private void cbSubject_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btGenerate.PerformClick();
             }
         }
     }

@@ -59,6 +59,7 @@
             this.tbServer.Name = "tbServer";
             this.tbServer.Size = new System.Drawing.Size(219, 20);
             this.tbServer.TabIndex = 2;
+            this.tbServer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbServer_KeyDown);
             // 
             // tbDatabase
             // 
@@ -66,6 +67,7 @@
             this.tbDatabase.Name = "tbDatabase";
             this.tbDatabase.Size = new System.Drawing.Size(219, 20);
             this.tbDatabase.TabIndex = 3;
+            this.tbDatabase.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDatabase_KeyDown);
             // 
             // btChange
             // 
