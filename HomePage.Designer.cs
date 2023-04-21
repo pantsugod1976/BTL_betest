@@ -113,7 +113,7 @@
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelProgram);
             this.Name = "HomePage";
-            this.Text = "Form1";
+            this.Text = "Question Manager";
             this.Load += new System.EventHandler(this.HomePage_Load);
             this.tbPanelButton.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);

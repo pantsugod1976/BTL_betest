@@ -66,7 +66,7 @@ namespace WindowsFormsApp2
                             tbSubject.Text = reader["Hoc_phan"].ToString();
                             tbType.Text = reader["Kieu_cau_hoi"].ToString();
                             tbPoint.Text = reader["Diem"].ToString();
-                            if (tbType.Text == "Trắc nghiệm")
+                            if (tbType.Text.Equals("Trắc nghiệm", StringComparison.OrdinalIgnoreCase))
                             {
                                 tbA.Text = reader["A"].ToString();
                                 tbB.Text = reader["B"].ToString();

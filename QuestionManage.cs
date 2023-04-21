@@ -124,7 +124,7 @@ namespace BTL_update
             string description = tbDescription.Text.Trim();
             string subject = cbSubject.Text.ToUpper();
             string type = cbType.Text;
-            string query = string.Format("SELECT * FROM question WHERE Noi_dung LIKE COALESCE(NULLIF(N\'{0}%\', ''), Noi_dung)\n" +
+            string query = string.Format("SELECT ID, Noi_dung as 'Nội dung', Hoc_phan as 'Học phần', Kieu_cau_hoi as 'Kiểu câu hỏi' FROM question WHERE Noi_dung LIKE COALESCE(NULLIF(N\'{0}%\', ''), Noi_dung)\n" +
                                         " AND Hoc_phan = COALESCE(NULLIF(N\'{1}\', ''), Hoc_phan)\n" +
                                         " AND Kieu_cau_hoi = COALESCE(NULLIF(N\'{2}\',''), Kieu_cau_hoi)", description, subject, type);
             using (SqlConnection conn = connect.connectSQL())

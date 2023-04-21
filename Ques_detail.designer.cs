@@ -265,7 +265,7 @@
             this.Controls.Add(this.lbPoint);
             this.Controls.Add(this.gbChoice);
             this.Name = "Ques_detail";
-            this.Text = "Form1";
+            this.Text = "Properties";
             this.Load += new System.EventHandler(this.Ques_detail_Load);
             this.gbChoice.ResumeLayout(false);
             this.gbChoice.PerformLayout();

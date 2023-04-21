@@ -270,7 +270,7 @@
             this.Controls.Add(this.gbChoice);
             this.Controls.Add(this.gbType);
             this.Name = "AddQuestion";
-            this.Text = "Form1";
+            this.Text = "Insert question";
             this.Load += new System.EventHandler(this.AddQuestion_Load);
             this.gbChoice.ResumeLayout(false);
             this.gbChoice.PerformLayout();
