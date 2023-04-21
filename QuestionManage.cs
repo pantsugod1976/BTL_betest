@@ -171,7 +171,7 @@ namespace BTL_update
                 string id = dataGridView1.Rows[cell_index].Cells[dataGridView1.Columns["ID"].Index].Value.ToString();
                 int ID = int.Parse(id);
                 int prev_ID = ID - 1;
-                string query = string.Format("begin transaction;\ndelete from question where ID = {0}\nDBCC CHECKIDENT(question, reseed, {1})\ncommit;", ID, prev_ID.ToString());
+                string query = string.Format("delete from question where ID = {0}", ID, prev_ID.ToString());
                 using (SqlConnection conn = connect.connectSQL())
                 {
                     conn.Open();
@@ -181,7 +181,7 @@ namespace BTL_update
                     }
                 }
                 MessageBox.Show("Xóa thành công");
-                Application.OpenForms["HomePage"].Enabled = true;
+                RefreshData();
             }
         }
 

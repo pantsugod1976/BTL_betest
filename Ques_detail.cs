@@ -187,7 +187,7 @@ namespace WindowsFormsApp2
             if(res == DialogResult.OK)
             {
                 int prev_ID = int.Parse(ID) - 1;
-                string query = string.Format("begin transaction;\ndelete from question where ID = {0}\nDBCC CHECKIDENT(question, reseed, {1})\ncommit;", ID, prev_ID.ToString());
+                string query = string.Format("delete from question where ID = {0}", ID, prev_ID.ToString());
                 using (SqlConnection conn = sql.connectSQL())
                 {
                     conn.Open();
