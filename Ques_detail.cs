@@ -185,8 +185,7 @@ namespace WindowsFormsApp2
             DialogResult res = MessageBox.Show("Bạn có muốn xóa câu hỏi?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if(res == DialogResult.OK)
             {
-                int prev_ID = int.Parse(ID) - 1;
-                string query = string.Format("delete from question where ID = {0}", ID, prev_ID.ToString());
+                string query = string.Format("delete from question where ID = {0}", ID);
                 using (SqlConnection conn = sql.connectSQL())
                 {
                     conn.Open();
