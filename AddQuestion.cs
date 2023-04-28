@@ -130,8 +130,6 @@ namespace BTL_update
         {
             this.Close();
             form.RefreshData();
-            Application.OpenForms["HomePage"].Enabled = true;
-            Application.OpenForms["HomePage"].Show();
         }
     }
 }

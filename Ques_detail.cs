@@ -31,7 +31,6 @@ namespace WindowsFormsApp2
         {
             this.Close();
             form.RefreshData();
-            Application.OpenForms["HomePage"].Enabled = true;
         }
 
         private void getDetail()

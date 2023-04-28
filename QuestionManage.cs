@@ -83,14 +83,13 @@ namespace BTL_update
             CB_subject();
             CB_Type();
             dataGridView1.CurrentCell = null;
-
+            dataGridView1.AllowUserToDeleteRows = false;
         }
 
         private void btAdd_Click(object sender, EventArgs e)
         {
             Form frm = new AddQuestion(this);
-            frm.Show();
-            Application.OpenForms["HomePage"].Enabled = false;
+            frm.ShowDialog();
         }
         public void RefreshData()
         {
@@ -109,8 +108,7 @@ namespace BTL_update
             {
 
                 Ques_detail frm = new Ques_detail(id, type, this);
-                frm.Show();
-                Application.OpenForms["HomePage"].Enabled = false;
+                frm.ShowDialog();
             }
         }
         private void Search() 
@@ -140,8 +138,7 @@ namespace BTL_update
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form frm = new AddQuestion(this);
-            frm.Show();
-            Application.OpenForms["HomePage"].Enabled = false;
+            frm.ShowDialog();
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -156,8 +153,10 @@ namespace BTL_update
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataGridViewCellEventArgs ex = new DataGridViewCellEventArgs(dataGridView1.SelectedColumns[0].Index, dataGridView1.SelectedRows[0].Index);
-            this.dataGridView1_CellContentClick(sender, ex);
+            string ID = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[dataGridView1.Columns["ID"].Index].Value.ToString();
+            string type = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[dataGridView1.Columns["Kiểu câu hỏi"].Index].Value.ToString();
+            Ques_detail f = new Ques_detail(ID, type, this);
+            f.ShowDialog();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,8 +167,7 @@ namespace BTL_update
                 int cell_index = dataGridView1.SelectedCells[0].RowIndex;
                 string id = dataGridView1.Rows[cell_index].Cells[dataGridView1.Columns["ID"].Index].Value.ToString();
                 int ID = int.Parse(id);
-                int prev_ID = ID - 1;
-                string query = string.Format("delete from question where ID = {0}", ID, prev_ID.ToString());
+                string query = string.Format("delete from question where ID = {0}", ID);
                 using (SqlConnection conn = connect.connectSQL())
                 {
                     conn.Open();
