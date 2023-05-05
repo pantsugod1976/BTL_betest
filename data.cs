@@ -51,7 +51,7 @@ namespace BTL_update
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "delete from question where Kieu_cau_hoi = N\'@type\'";
-                    MessageBox.Show(cmd.CommandText);
+                    cmd.CommandText = "delete from question where Kieu_cau_hoi = N\'@type\'";
                     cmd.Parameters.AddWithValue("@type", cbType.Text);
                     cmd.ExecuteNonQuery();
                     if (cbType.Text.Equals("trắc nghiệm", StringComparison.OrdinalIgnoreCase))
