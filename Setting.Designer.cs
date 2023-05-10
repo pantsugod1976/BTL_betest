@@ -33,6 +33,7 @@
             this.btData = new System.Windows.Forms.Button();
             this.btServer = new System.Windows.Forms.Button();
             this.panelND = new System.Windows.Forms.Panel();
+            this.btAccount = new System.Windows.Forms.Button();
             this.panelButton.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,24 +50,26 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.btData, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btServer, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btAccount, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(118, 100);
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(118, 106);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btData
             // 
             this.btData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btData.Location = new System.Drawing.Point(3, 53);
+            this.btData.Location = new System.Drawing.Point(3, 38);
             this.btData.Name = "btData";
-            this.btData.Size = new System.Drawing.Size(112, 44);
+            this.btData.Size = new System.Drawing.Size(112, 29);
             this.btData.TabIndex = 1;
             this.btData.Text = "Data";
             this.btData.UseVisualStyleBackColor = true;
@@ -77,7 +80,7 @@
             this.btServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btServer.Location = new System.Drawing.Point(3, 3);
             this.btServer.Name = "btServer";
-            this.btServer.Size = new System.Drawing.Size(112, 44);
+            this.btServer.Size = new System.Drawing.Size(112, 29);
             this.btServer.TabIndex = 0;
             this.btServer.Text = "Server";
             this.btServer.UseVisualStyleBackColor = true;
@@ -91,6 +94,17 @@
             this.panelND.Name = "panelND";
             this.panelND.Size = new System.Drawing.Size(682, 450);
             this.panelND.TabIndex = 1;
+            // 
+            // btAccount
+            // 
+            this.btAccount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btAccount.Location = new System.Drawing.Point(3, 73);
+            this.btAccount.Name = "btAccount";
+            this.btAccount.Size = new System.Drawing.Size(112, 30);
+            this.btAccount.TabIndex = 2;
+            this.btAccount.Text = "Account";
+            this.btAccount.UseVisualStyleBackColor = true;
+            this.btAccount.Click += new System.EventHandler(this.btAccount_Click);
             // 
             // Setting
             // 
@@ -115,5 +129,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btData;
         private System.Windows.Forms.Button btServer;
+        private System.Windows.Forms.Button btAccount;
     }
 }

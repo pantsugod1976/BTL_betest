@@ -93,7 +93,7 @@ namespace BTL_update
             cbSubject.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbType.AutoCompleteSource = AutoCompleteSource.ListItems;
             tbDescription.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            HomePage f = (HomePage)Application.OpenForms["HomePage"];
+            Login f = (Login)Application.OpenForms["Login"];
             if (f.role == 0)
             {
                 btAdd.Enabled = false;

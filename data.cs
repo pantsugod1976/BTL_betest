@@ -50,49 +50,35 @@ namespace BTL_update
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "delete from question where Kieu_cau_hoi = N\'@type\'";
-                    cmd.Parameters.AddWithValue("@type", cbType.Text);
+                    cmd.CommandText = string.Format("delete from question where Kieu_cau_hoi = N\'{0}\'", cbType.Text);
                     cmd.ExecuteNonQuery();
                     if (cbType.Text.Equals("trắc nghiệm", StringComparison.OrdinalIgnoreCase))
                     {
-                        cmd.CommandText =
-                            "BEGIN TRANSACTION;\n\n" +
-                            "DECLARE @output AS TABLE (Question_ID INT)\n" + //Tao bang output vs cot Question_ID
-                            "INSERT INTO question (Noi_dung, Hoc_phan, Kieu_cau_hoi)\nOUTPUT inserted.ID INTO @output(Question_ID)\nVALUES (N\'@description\', N\'@subject\', N\'@type\')\n\n" +
-                            "DECLARE @Question_ID INT\n SELECT @Question_ID = Question_ID FROM @output\n\n" +
-                            "INSERT INTO trac_nghiem(ID_question, A, B, C, D, Lua_chon, Diem) VALUES (@Question_ID, N\'@A\', N\'@B\', N\'@C\', N\'@D\', N\'@answer\', @point)\n" +
-                            "COMMIT;"
-                            ;
                         foreach (DataRow r in dt.Rows)
                         {
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@description", r["Noi_dung"].ToString());
-                            cmd.Parameters.AddWithValue("@subject", r["Hoc_phan"].ToString());
-                            cmd.Parameters.AddWithValue("@A", r["A"].ToString());
-                            cmd.Parameters.AddWithValue("@B", r["B"].ToString());
-                            cmd.Parameters.AddWithValue("@C", r["C"].ToString());
-                            cmd.Parameters.AddWithValue("@D", r["D"].ToString());
-                            cmd.Parameters.AddWithValue("@answer", r["Lua_chon"].ToString());
-                            cmd.Parameters.AddWithValue("@point", r["Diem"].ToString());
+                            cmd.CommandText =
+                                string.Format("BEGIN TRANSACTION;\n\n" +
+                                "DECLARE @output AS TABLE (Question_ID INT)\n" + //Tao bang output vs cot Question_ID
+                                "INSERT INTO question (Noi_dung, Hoc_phan, Kieu_cau_hoi)\nOUTPUT inserted.ID INTO @output(Question_ID)\nVALUES (N\'{0}\', N\'{1}\', N\'{2}\')\n\n" +
+                                "DECLARE @Question_ID INT\n SELECT @Question_ID = Question_ID FROM @output\n\n" +
+                                "INSERT INTO trac_nghiem(ID_question, A, B, C, D, Lua_chon, Diem) VALUES (@Question_ID, N\'{3}\', N\'{4}\', N\'{5}\', N\'{6}\', N\'{7}\', {8})\n" +
+                                "COMMIT;", r["Noi_dung"].ToString(), r["Hoc_phan"].ToString(), cbType.Text, r["A"].ToString(), r["B"].ToString(), r["C"].ToString(), r["D"].ToString(), r["Lua_chon"].ToString(), r["Diem"].ToString())
+                                ;
                             cmd.ExecuteNonQuery();
                         }
                     }
                     else
                     {
-                        cmd.CommandText =
-                            "BEGIN TRANSACTION;\n\n" +
-                            "DECLARE @output AS TABLE (Question_ID INT)\n" + //Tao bang output vs cot Question_ID
-                            "INSERT INTO question (Noi_dung, Hoc_phan, Kieu_cau_hoi)\n OUTPUT inserted.ID INTO @output(Question_ID)\n VALUES (N\'@description\', N\'@subject\', N\'@type\')\n\n" +
-                            "DECLARE @Question_ID INT\n SELECT @Question_ID = Question_ID FROM @output\n\n" +
-                            "INSERT INTO tu_luan(ID_question, Diem) VALUES (@Question_ID, @point)\n" +
-                            "COMMIT;"
-                           ;
                         foreach (DataRow r in dt.Rows)
                         {
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@description", r["Noi_dung"].ToString());
-                            cmd.Parameters.AddWithValue("@subject", r["Hoc_phan"].ToString());
-                            cmd.Parameters.AddWithValue("@point", r["Diem"].ToString());
+                            cmd.CommandText = string.Format(
+                                "BEGIN TRANSACTION;\n\n" +
+                                "DECLARE @output AS TABLE (Question_ID INT)\n" + //Tao bang output vs cot Question_ID
+                                "INSERT INTO question (Noi_dung, Hoc_phan, Kieu_cau_hoi)\n OUTPUT inserted.ID INTO @output(Question_ID)\n VALUES (N\'{0}\', N\'{1}\', N\'{2}\')\n\n" +
+                                "DECLARE @Question_ID INT\n SELECT @Question_ID = Question_ID FROM @output\n\n" +
+                                "INSERT INTO tu_luan(ID_question, Diem) VALUES (@Question_ID, {3})\n" +
+                                "COMMIT;", r["Noi_dung"].ToString(), r["Hoc_phan"].ToString(), cbType.Text, r["Diem"].ToString())
+                               ;
                             cmd.ExecuteNonQuery();
                         }
                     }

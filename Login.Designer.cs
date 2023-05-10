@@ -33,6 +33,7 @@
             this.pnTiltle = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbLogin = new System.Windows.Forms.GroupBox();
+            this.lbPasschange = new System.Windows.Forms.Label();
             this.btCancel = new System.Windows.Forms.Button();
             this.btLogin = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
@@ -76,6 +77,7 @@
             // 
             // gbLogin
             // 
+            this.gbLogin.Controls.Add(this.lbPasschange);
             this.gbLogin.Controls.Add(this.btCancel);
             this.gbLogin.Controls.Add(this.btLogin);
             this.gbLogin.Controls.Add(this.tbPassword);
@@ -88,6 +90,18 @@
             this.gbLogin.TabIndex = 0;
             this.gbLogin.TabStop = false;
             this.gbLogin.Text = "Thông tin đăng nhập";
+            // 
+            // lbPasschange
+            // 
+            this.lbPasschange.AutoSize = true;
+            this.lbPasschange.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPasschange.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lbPasschange.Location = new System.Drawing.Point(324, 112);
+            this.lbPasschange.Name = "lbPasschange";
+            this.lbPasschange.Size = new System.Drawing.Size(80, 13);
+            this.lbPasschange.TabIndex = 4;
+            this.lbPasschange.Text = "Quên mật khẩu";
+            this.lbPasschange.Click += new System.EventHandler(this.lbPasschange_Click);
             // 
             // btCancel
             // 
@@ -156,6 +170,7 @@
             this.Controls.Add(this.pnTiltle);
             this.Name = "Login";
             this.Text = "Login";
+            this.VisibleChanged += new System.EventHandler(this.Login_VisibleChanged);
             this.pnTiltle.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.gbLogin.ResumeLayout(false);
@@ -177,5 +192,6 @@
         private System.Windows.Forms.Label lbPassword;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lbPasschange;
     }
 }

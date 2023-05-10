@@ -44,9 +44,9 @@
             this.tbPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tbPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tbPanelButton.Controls.Add(this.btSetting, 2, 0);
             this.tbPanelButton.Controls.Add(this.btTest, 1, 0);
             this.tbPanelButton.Controls.Add(this.btQues, 0, 0);
+            this.tbPanelButton.Controls.Add(this.btSetting, 2, 0);
             this.tbPanelButton.Location = new System.Drawing.Point(3, 3);
             this.tbPanelButton.Name = "tbPanelButton";
             this.tbPanelButton.RowCount = 1;
@@ -58,7 +58,7 @@
             // 
             this.btSetting.Location = new System.Drawing.Point(177, 3);
             this.btSetting.Name = "btSetting";
-            this.btSetting.Size = new System.Drawing.Size(87, 49);
+            this.btSetting.Size = new System.Drawing.Size(87, 51);
             this.btSetting.TabIndex = 2;
             this.btSetting.Text = "Cài đặt";
             this.btSetting.UseVisualStyleBackColor = true;

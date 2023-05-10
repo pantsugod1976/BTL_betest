@@ -45,7 +45,20 @@ namespace BTL_update
 
         private void Setting_Load(object sender, EventArgs e)
         {
+            Login f = (Login)Application.OpenForms["Login"];
+            if(f.role == 0)
+            {
+                btServer.Enabled = false;
+                btData.Enabled = false;
+                open_ChildForm(new Account());
+            }
+            else
             open_ChildForm(new server());
+        }
+
+        private void btAccount_Click(object sender, EventArgs e)
+        {
+            open_ChildForm(new Account());
         }
     }
 }

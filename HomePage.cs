@@ -13,15 +13,12 @@ namespace BTL_update
 {
     public partial class HomePage : Form
     {
+        public int role;
         public HomePage()
         {
             InitializeComponent();
-        }
-        public int role;
-        public HomePage(int role)
-        {
-            InitializeComponent();
-            this.role = role;
+            Login f = (Login)Application.OpenForms["Login"];
+            role = f.role;
         }
         private Form cur_childForm;
         private void open_ChildForm(Form child_form)
@@ -43,8 +40,7 @@ namespace BTL_update
         {
             if (role == 0)
             {
-                btTest.Visible = false;
-                btSetting.Visible = false;
+                btTest.Enabled = false;
             }
             open_ChildForm(new QuestionManage());
         }
@@ -66,7 +62,7 @@ namespace BTL_update
 
         private void HomePage_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            Application.OpenForms["Login"].Show();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace BTL_update
             InitializeComponent();
         }
         private Connection connect = new Connection();
+        public int role;
+        public int id;
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -34,6 +36,7 @@ namespace BTL_update
                     {
                         if (reader.Read())
                         {
+                            id = Convert.ToInt32(reader["id"]);
                             return (int)reader["role"];
                         }
                     }
@@ -43,12 +46,12 @@ namespace BTL_update
         }
         private void btLogin_Click(object sender, EventArgs e)
         {
-            int role = getLogin(tbName.Text, tbPassword.Text);
+            role = getLogin(tbName.Text, tbPassword.Text);
             if (role != 2)
             {
-                HomePage f = new HomePage(role);
-                f.Show();
+                HomePage f = new HomePage();
                 this.Hide();
+                f.ShowDialog();
             }
             else
             {
@@ -85,6 +88,19 @@ namespace BTL_update
                 }
                 btLogin.PerformClick();
             }
+        }
+
+        private void lbPasschange_Click(object sender, EventArgs e)
+        {
+            Password_change f = new Password_change();
+            f.ShowDialog();
+        }
+
+        private void Login_VisibleChanged(object sender, EventArgs e)
+        {
+            tbName.Clear();
+            tbPassword.Clear();
+            tbName.Focus();
         }
     }
 }

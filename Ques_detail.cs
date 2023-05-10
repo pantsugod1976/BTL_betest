@@ -103,7 +103,7 @@ namespace WindowsFormsApp2
                         break;
                 }
             }
-            HomePage f = (HomePage)Application.OpenForms["HomePage"];
+            Login f = (Login)Application.OpenForms["Login"];
             if (f.role == 0)
             {
                 btDel.Enabled = false;
