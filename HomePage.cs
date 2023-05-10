@@ -17,6 +17,12 @@ namespace BTL_update
         {
             InitializeComponent();
         }
+        public int role;
+        public HomePage(int role)
+        {
+            InitializeComponent();
+            this.role = role;
+        }
         private Form cur_childForm;
         private void open_ChildForm(Form child_form)
         {
@@ -35,6 +41,11 @@ namespace BTL_update
         }
         private void HomePage_Load(object sender, EventArgs e)
         {
+            if (role == 0)
+            {
+                btTest.Visible = false;
+                btSetting.Visible = false;
+            }
             open_ChildForm(new QuestionManage());
         }
 
@@ -51,6 +62,11 @@ namespace BTL_update
         private void btSetting_Click(object sender, EventArgs e)
         {
             open_ChildForm(new Setting());
+        }
+
+        private void HomePage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

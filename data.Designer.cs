@@ -112,6 +112,7 @@
             // 
             // cbType
             // 
+            this.cbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbType.FormattingEnabled = true;
             this.cbType.Location = new System.Drawing.Point(202, 36);
             this.cbType.Name = "cbType";

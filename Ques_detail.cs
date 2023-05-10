@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using BTL_update;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace WindowsFormsApp2
 {
@@ -101,6 +102,12 @@ namespace WindowsFormsApp2
                         rbD.Checked = true;
                         break;
                 }
+            }
+            HomePage f = (HomePage)Application.OpenForms["HomePage"];
+            if (f.role == 0)
+            {
+                btDel.Enabled = false;
+                btEdit.Enabled = false;
             }
         }
 
@@ -196,7 +203,6 @@ namespace WindowsFormsApp2
                 }
                 MessageBox.Show("Xóa thành công");
                 this.Close();
-                Application.OpenForms["HomePage"].Enabled = true;
                 form.RefreshData();
             }
         }

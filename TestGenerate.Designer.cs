@@ -45,6 +45,7 @@
             // 
             // tbSearch
             // 
+            this.tbSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbSearch.Location = new System.Drawing.Point(6, 59);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(304, 20);
@@ -74,6 +75,7 @@
             // 
             // cbSubject
             // 
+            this.cbSubject.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbSubject.FormattingEnabled = true;
             this.cbSubject.Location = new System.Drawing.Point(192, 66);
             this.cbSubject.Name = "cbSubject";
@@ -83,6 +85,7 @@
             // 
             // cbType
             // 
+            this.cbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbType.FormattingEnabled = true;
             this.cbType.Location = new System.Drawing.Point(9, 66);
             this.cbType.Name = "cbType";

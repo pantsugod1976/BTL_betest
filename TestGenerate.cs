@@ -62,9 +62,12 @@ namespace BTL_update
             GetCBtype();
             GetSubject();
             cbType.Focus();
+            cbSubject.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbType.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbType.DroppedDown = true;
             dgvList.AllowUserToAddRows = false;
             btPreview.Enabled = false;
+            tbSearch.Enabled = false;
         }
         private void GetQuestion()
         {
@@ -79,6 +82,12 @@ namespace BTL_update
                 }
             }
             dgvList.DataSource = dt;
+            AutoCompleteStringCollection data = new AutoCompleteStringCollection();
+            foreach(DataRow r in dt.Rows)
+            {
+                data.Add(r["Nội dung"].ToString());
+            }
+            tbSearch.AutoCompleteCustomSource = data;
         }
         private void btGenerate_Click(object sender, EventArgs e)
         {
@@ -97,6 +106,7 @@ namespace BTL_update
                 dgvList.Columns.Add(dataGridViewCheckBoxColumn);
             }
             btPreview.Enabled = true;
+            tbSearch.Enabled = true;
         }
         private void WriteTxt(DataTable dt, string FolderPath, string FolderName)
         {

@@ -56,6 +56,12 @@ namespace BTL_update
                         adt.Fill(dt);
                 }
             }
+            AutoCompleteStringCollection data = new AutoCompleteStringCollection();
+            foreach (DataRow r in dt.Rows)
+            {
+                data.Add(r["Nội dung"].ToString());
+            }
+            tbDescription.AutoCompleteCustomSource = data;
         }
         private void QuestionManage_Load(object sender, EventArgs e)
         {
@@ -84,6 +90,17 @@ namespace BTL_update
             CB_Type();
             dataGridView1.CurrentCell = null;
             dataGridView1.AllowUserToDeleteRows = false;
+            cbSubject.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbType.AutoCompleteSource = AutoCompleteSource.ListItems;
+            tbDescription.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            HomePage f = (HomePage)Application.OpenForms["HomePage"];
+            if (f.role == 0)
+            {
+                btAdd.Enabled = false;
+                toolStripMenuItem1.Enabled = false;
+                editToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void btAdd_Click(object sender, EventArgs e)
@@ -218,13 +235,7 @@ namespace BTL_update
             }
         }
 
-        private void cbSubject_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter){
-                cbType.Focus();
-                cbType.DroppedDown = true;
-            }
-        }
+        
 
         private void cbType_KeyDown(object sender, KeyEventArgs e)
         {
@@ -256,6 +267,12 @@ namespace BTL_update
             cbSubject.SelectedItem = null;
             cbType.SelectedItem = null;
             Search();
+        }
+
+        private void cbSubject_KeyDown(object sender, KeyEventArgs e)
+        {
+            cbType.Focus();
+            cbType.DroppedDown = true;
         }
     }
 }

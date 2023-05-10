@@ -51,7 +51,6 @@ namespace BTL_update
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "delete from question where Kieu_cau_hoi = N\'@type\'";
-                    cmd.CommandText = "delete from question where Kieu_cau_hoi = N\'@type\'";
                     cmd.Parameters.AddWithValue("@type", cbType.Text);
                     cmd.ExecuteNonQuery();
                     if (cbType.Text.Equals("trắc nghiệm", StringComparison.OrdinalIgnoreCase))
@@ -75,7 +74,6 @@ namespace BTL_update
                             cmd.Parameters.AddWithValue("@D", r["D"].ToString());
                             cmd.Parameters.AddWithValue("@answer", r["Lua_chon"].ToString());
                             cmd.Parameters.AddWithValue("@point", r["Diem"].ToString());
-                            cmd.Parameters.AddWithValue("@type", cbType.Text);
                             cmd.ExecuteNonQuery();
                         }
                     }
@@ -94,7 +92,6 @@ namespace BTL_update
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@description", r["Noi_dung"].ToString());
                             cmd.Parameters.AddWithValue("@subject", r["Hoc_phan"].ToString());
-                            cmd.Parameters.AddWithValue("@type", cbType.Text);
                             cmd.Parameters.AddWithValue("@point", r["Diem"].ToString());
                             cmd.ExecuteNonQuery();
                         }
@@ -112,6 +109,7 @@ namespace BTL_update
             cbType.Items.Add("trắc nghiệm");
             cbType.Items.Add("tự luận");
             gbImport.Hide();
+            cbType.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void btFile_Click(object sender, EventArgs e)

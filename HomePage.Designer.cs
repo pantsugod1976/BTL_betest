@@ -114,6 +114,7 @@
             this.Controls.Add(this.panelProgram);
             this.Name = "HomePage";
             this.Text = "Question Manager";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HomePage_FormClosed);
             this.Load += new System.EventHandler(this.HomePage_Load);
             this.tbPanelButton.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
