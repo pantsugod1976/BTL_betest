@@ -271,8 +271,11 @@ namespace BTL_update
 
         private void cbSubject_KeyDown(object sender, KeyEventArgs e)
         {
-            cbType.Focus();
-            cbType.DroppedDown = true;
+            if (e.KeyCode == Keys.Enter)
+            {
+                cbType.Focus();
+                cbType.DroppedDown = true;
+            }
         }
     }
 }
