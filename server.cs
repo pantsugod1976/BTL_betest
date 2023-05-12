@@ -22,8 +22,7 @@ namespace BTL_update
         private string prev_database;
         private static void SetSetting(string key, string value)
         {
-            Configuration configuration =
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             configuration.AppSettings.Settings[key].Value = value;
             configuration.Save(ConfigurationSaveMode.Full, true);
             ConfigurationManager.RefreshSection("appSettings");
