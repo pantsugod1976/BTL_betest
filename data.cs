@@ -189,13 +189,18 @@ namespace BTL_update
         }
         private void btBackUp_Click(object sender, EventArgs e)
         {
+            gbImport.Hide();
             using (SqlConnection conn = connect.connectSQL())
             {
                 conn.Open();
                 string query_TN = "select question.ID, question.Noi_dung, question.Hoc_phan, question.Kieu_cau_hoi, trac_nghiem.A, trac_nghiem.B, trac_nghiem.C, trac_nghiem.D, trac_nghiem.Lua_chon, trac_nghiem.Diem FROM question INNER JOIN trac_nghiem ON question.ID = trac_nghiem.ID_question";
                 string query_TL = "select question.ID, question.Noi_dung, question.Hoc_phan, question.Kieu_cau_hoi, tu_luan.Diem FROM question INNER JOIN tu_luan ON question.ID = tu_luan.ID_question";
                 FolderBrowserDialog choofdlog = new FolderBrowserDialog();
-                choofdlog.ShowDialog();
+                DialogResult res = choofdlog.ShowDialog();
+                if(res == DialogResult.Cancel)
+                {
+                    return;
+                }
                 string FolderPath = choofdlog.SelectedPath;
                 WriteValue(conn, FolderPath, query_TL, "tu_luan");
                 WriteValue(conn, FolderPath, query_TN, "trac_nghiem");
